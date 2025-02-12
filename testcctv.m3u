@@ -1,23 +1,23 @@
-#EXTM3U x-tvg-url="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/e.xml"
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/tv/CCTV1.png" group-title="央视高清",CCTV-1高清
+#EXTM3U x-tvg-url="http://epg.51zmt.top:8000/e.xml"
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/tv/CCTV1.png" group-title="央视高清",CCTV-1高清
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.110:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/tv/CCTV1.png" group-title="央视高清",CCTV-1高清
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.108:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/tv/CCTV1.png" group-title="央视高清",CCTV-1高清
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.107:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/tv/CCTV1.png" group-title="央视高清",CCTV-1高清
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.106:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/tv/CCTV1.png" group-title="央视高清",CCTV-1高清
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.105:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/tv/CCTV1.png" group-title="央视高清",CCTV-1高清
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.104:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/tv/CCTV1.png" group-title="央视高清",CCTV-1高清
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.103:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/tv/CCTV1.png" group-title="央视高清",CCTV-1高清
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.101:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://ghproxy.cc/https://raw.githubusercontent.com/fanmingming/live/main/tv/CCTV1.png" group-title="央视高清",CCTV-1高清
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.100:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/85/20210112013218292xpd.png" group-title="央视高清",CCTV-2高清
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221228083/10000100000000060000000002633372_0.smil
