@@ -1,4 +1,4 @@
-#EXTM3U x-tvg-url="https://iptv.crestekk.cn/epgphp/?ch={name}&date={date}"
+#EXTM3U
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://epg.51zmt.top:8000/tb1/CCTV/CCTV1.png" group-title="央视高清",CCTV-1高清
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="http://115.233.43.74:33200/CPS/images/universal/film/logo/202101/20210112/2/202101120129350637lv.png" group-title="央视高清",CCTV-1高清
