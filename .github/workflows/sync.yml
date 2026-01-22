@@ -2,7 +2,7 @@ name: Sync and Rewrite IPTV
 
 on:
   schedule:
-    - cron: "0 0 * * 1"   # 每 6 小时执行一次
+    - cron: "0 0 * * 1"   # 每周执行一次
   workflow_dispatch:
 
 jobs:
