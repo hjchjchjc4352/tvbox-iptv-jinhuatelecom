@@ -28,40 +28,38 @@ if os.path.exists(TEST_FILE):
                 base = url.split("/PLTV", 1)[1]
                 test_map.setdefault(name, []).append(base)
 
-# 读取上游 IPTV
-channels = []
 with open(UPSTREAM_FILE, "r", encoding="utf-8") as f:
-    for line in f:
-        if "," in line and "/PLTV" in line:
-            name, url = line.strip().split(",", 1)
-            base = url.split("/PLTV", 1)[1]
-            channels.append((name, base))
-        else:
-            print(f"跳过无效行（没有 /PLTV）: {line.strip()}")
-
-def normalize_name(name):
-    name = name.replace("高清", "").replace("频道", "")
-    name = name.replace("CCTV", "CCTV-")
-    name = name.replace("--", "-")
-    if "CCTV-" in name:
-        parts = name.split("CCTV-")[1]
-        num = ""
-        for c in parts:
-            if c.isdigit():
-                num += c
-            else:
-                break
-        return f"CCTV-{num}综合"
-    return name.strip()
+    upstream_lines = f.readlines()
 
 with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
-    for name, base in channels:
-        clean_name = normalize_name(name)
-        bases = test_map.get(clean_name, [base])
-        ips = DEFAULT_IPS.copy()
-        random.shuffle(ips)
-        for b in bases:
-            for ip in ips:
-                out.write(f"{clean_name},rtsp://{ip}:554/PLTV{b}\n")
+    for line in upstream_lines:
 
-print("✅ rewrite.py 执行完毕，输出文件已生成：jinhuatelecomiptv.txt")
+        line = line.strip()
+
+        # 分类行：原样保留
+        if line.startswith("【") and line.endswith("】"):
+            out.write(line + "\n")
+            continue
+
+        # 无效行：跳过
+        if "," not in line or "/PLTV" not in line:
+            continue
+
+        # 频道名与 URL
+        name, url = line.split(",", 1)
+        base = url.split("/PLTV", 1)[1]
+
+        # 如果 testcctv.txt 有对应频道 → 用 testcctv.txt 的模板
+        if name in test_map:
+            bases = test_map[name]
+        else:
+            bases = [base]
+
+        # 多线路生成
+        for b in bases:
+            ips = DEFAULT_IPS.copy()
+            random.shuffle(ips)
+            for ip in ips:
+                out.write(f"{name},rtsp://{ip}:554/PLTV{b}\n")
+
+print("rewrite.py 执行完毕")
