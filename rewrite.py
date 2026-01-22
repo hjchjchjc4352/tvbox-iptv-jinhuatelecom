@@ -1,15 +1,10 @@
 import random
+import os
 
-# 你 testcctv.txt 的参考源
 TEST_FILE = "testcctv.txt"
-
-# 上游同步来的 IPTV 文件
 UPSTREAM_FILE = "upstream.txt"
+OUTPUT_FILE = "jinhuatelecomiptv.txt"
 
-# 输出文件（覆盖你的仓库）
-OUTPUT_FILE = "Hangzhou_Telecom_Unicast.txt"
-
-# 你要求的默认 IP 池（排除 102 和 109）
 DEFAULT_IPS = [
     "115.233.43.100",
     "115.233.43.101",
@@ -25,14 +20,15 @@ DEFAULT_IPS = [
 
 # 读取 testcctv.txt
 test_map = {}
-with open(TEST_FILE, "r", encoding="utf-8") as f:
-    for line in f:
-        if "," in line:
-            name, url = line.strip().split(",", 1)
-            base = url.split("/PLTV")[1]  # 取后半段
-            if name not in test_map:
-                test_map[name] = []
-            test_map[name].append(base)
+if os.path.exists(TEST_FILE):
+    with open(TEST_FILE, "r", encoding="utf-8") as f:
+        for line in f:
+            if "," in line:
+                name, url = line.strip().split(",", 1)
+                base = url.split("/PLTV")[1]
+                if name not in test_map:
+                    test_map[name] = []
+                test_map[name].append(base)
 
 # 读取上游 IPTV
 channels = []
@@ -43,25 +39,41 @@ with open(UPSTREAM_FILE, "r", encoding="utf-8") as f:
             base = url.split("/PLTV")[1]
             channels.append((name, base))
 
-# 输出文件
+def normalize_name(name):
+    """智能频道名处理：CCTV1综合高清 → CCTV-1综合"""
+    name = name.replace("高清", "").replace("频道", "")
+    name = name.replace("综合", "综合")
+    name = name.replace("CCTV", "CCTV-")
+    name = name.replace("--", "-")
+    # CCTV-1综合高清 → CCTV-1综合
+    if "CCTV-" in name:
+        parts = name.split("CCTV-")[1]
+        num = ""
+        for c in parts:
+            if c.isdigit():
+                num += c
+            else:
+                break
+        return f"CCTV-{num}综合"
+    return name
+
 out = open(OUTPUT_FILE, "w", encoding="utf-8")
 
 for name, base in channels:
-    # 统一频道名格式
-    clean_name = name.replace("高清", "").replace("综合", "").replace("CCTV", "CCTV-").replace("--", "-")
+    clean_name = normalize_name(name)
 
-    # 如果 testcctv.txt 有对应频道
+    # testcctv.txt 有对应频道
     if clean_name in test_map:
         bases = test_map[clean_name]
     else:
-        # testcctv.txt 没有 → 使用默认 IP 池
         bases = [base]
 
-    # 生成多线路
+    # 多线路生成
     for b in bases:
         ips = DEFAULT_IPS.copy()
         random.shuffle(ips)
         for ip in ips:
-            out.write(f"{clean_name},{'rtsp://' + ip + ':554/PLTV' + b}\n")
+            out.write(f"{clean_name},rtsp://{ip}:554/PLTV{b}\n")
 
 out.close()
+print("Rewrite completed successfully.")
