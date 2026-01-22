@@ -36,30 +36,27 @@ with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
 
         line = line.strip()
 
-        # 分类行：原样保留
-        if line.startswith("【") and line.endswith("】"):
+        # 分类行格式：分类名,#genre#
+        if line.endswith(",#genre#"):
             out.write(line + "\n")
             continue
 
-        # 无效行：跳过
-        if "," not in line or "/PLTV" not in line:
-            continue
+        # 频道行
+        if "," in line and "/PLTV" in line:
+            name, url = line.split(",", 1)
+            base = url.split("/PLTV", 1)[1]
 
-        # 频道名与 URL
-        name, url = line.split(",", 1)
-        base = url.split("/PLTV", 1)[1]
+            # testcctv.txt 优先
+            if name in test_map:
+                bases = test_map[name]
+            else:
+                bases = [base]
 
-        # 如果 testcctv.txt 有对应频道 → 用 testcctv.txt 的模板
-        if name in test_map:
-            bases = test_map[name]
-        else:
-            bases = [base]
-
-        # 多线路生成
-        for b in bases:
-            ips = DEFAULT_IPS.copy()
-            random.shuffle(ips)
-            for ip in ips:
-                out.write(f"{name},rtsp://{ip}:554/PLTV{b}\n")
+            # 多线路生成
+            for b in bases:
+                ips = DEFAULT_IPS.copy()
+                random.shuffle(ips)
+                for ip in ips:
+                    out.write(f"{name},rtsp://{ip}:554/PLTV{b}\n")
 
 print("rewrite.py 执行完毕")
