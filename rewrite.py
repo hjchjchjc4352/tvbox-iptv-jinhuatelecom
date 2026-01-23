@@ -2,7 +2,7 @@ import random
 import os
 import re
 
-# ================= 基本文件 =================
+# ================= 文件 =================
 TEST_FILE = "testcctv.txt"
 UPSTREAM_FILE = "upstream.txt"
 LOGO_M3U = "Hangzhou_Telecom_Unicast_ONLINE_LOGO.m3u"
@@ -12,7 +12,7 @@ OUTPUT_M3U = "jinhuatelecomiptv.m3u"
 
 EPG_URL = "https://myepg.org/Zhejiang_Telecom_IPTV/EPG/hz_uni_epg.xml.gz"
 
-# ================= IP =================
+# ================= IP 列表 =================
 DEFAULT_IPS = [
     "115.233.43.100",
     "115.233.43.101",
@@ -85,4 +85,73 @@ for line in final_lines:
             output_lines.append(line)
             continue
 
-        base = url.split("
+        base = url.split("/PLTV", 1)[1]
+        bases = test_map.get(name, [base])
+
+        for b in bases:
+            ips = DEFAULT_IPS.copy()
+            random.shuffle(ips)
+            for ip in ips:
+                output_lines.append(f"{name},rtsp://{ip}:554/PLTV{b}")
+    else:
+        output_lines.append(line)
+
+with open(OUTPUT_TXT, "w", encoding="utf-8") as f:
+    for l in output_lines:
+        f.write(l + "\n")
+
+# ================= 解析 LOGO m3u =================
+logo_map = {}
+
+if os.path.exists(LOGO_M3U):
+    with open(LOGO_M3U, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line.startswith("#EXTINF"):
+                continue
+
+            name = line.split(",", 1)[1]
+
+            def get(key):
+                m = re.search(rf'{key}="([^"]+)"', line)
+                return m.group(1) if m else name
+
+            logo_map[name] = {
+                "tvg-id": get("tvg-id"),
+                "tvg-name": get("tvg-name"),
+                "tvg-logo": get("tvg-logo"),
+            }
+
+# ================= 生成 M3U =================
+with open(OUTPUT_M3U, "w", encoding="utf-8") as f:
+    f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n')
+
+    current_group = ""
+
+    for line in output_lines:
+        if line.endswith(",#genre#"):
+            current_group = line.replace(",#genre#", "")
+            continue
+
+        if "," not in line:
+            continue
+
+        name, url = line.split(",", 1)
+
+        meta = logo_map.get(name, {
+            "tvg-id": name,
+            "tvg-name": name,
+            "tvg-logo": "",
+        })
+
+        f.write(
+            '#EXTINF:-1 '
+            f'tvg-id="{meta["tvg-id"]}" '
+            f'tvg-name="{meta["tvg-name"]}" '
+            f'tvg-logo="{meta["tvg-logo"]}" '
+            f'group-title="{current_group}",'
+            f'{name}\n'
+        )
+        f.write(url + "\n")
+
+print("rewrite.py 执行完成：TXT + M3U")
