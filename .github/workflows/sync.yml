@@ -20,6 +20,10 @@ jobs:
         run: |
           curl -L "https://raw.githubusercontent.com/FHZDCJ/Zhejiang_Telecom_IPTV/main/Hangzhou_Unicast/Hangzhou_Telecom_Unicast.txt" \
             -o upstream.txt
+      - name: Download upstream IPTV file
+        run: |
+          curl -L "https://raw.githubusercontent.com/FHZDCJ/Zhejiang_Telecom_IPTV/main/Hangzhou_Unicast/Hangzhou_Telecom_Unicast_ONLINE_LOGO.m3u" \
+            -o Hangzhou_Telecom_Unicast_ONLINE_LOGO.m3u
 
       - name: Run rewrite script
         run: python3 rewrite.py
