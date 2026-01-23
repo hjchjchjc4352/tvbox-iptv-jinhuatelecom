@@ -10,9 +10,12 @@ LOGO_M3U = "Hangzhou_Telecom_Unicast_ONLINE_LOGO.m3u"
 OUTPUT_TXT = "jinhuatelecomiptv.txt"
 OUTPUT_M3U = "jinhuatelecomiptv.m3u"
 
+OUTPUT_ONE_TXT = "oneiptv.txt"
+OUTPUT_ONE_M3U = "oneiptv.m3u"
+
 EPG_URL = "https://myepg.org/Zhejiang_Telecom_IPTV/EPG/hz_uni_epg.xml.gz"
 
-# ================= IP 列表 =================
+# ================= IP =================
 DEFAULT_IPS = [
     "115.233.43.100",
     "115.233.43.101",
@@ -25,6 +28,8 @@ DEFAULT_IPS = [
     "115.233.43.110",
     "115.233.43.111",
 ]
+
+ONE_IP = "115.233.43.111"
 
 SPECIAL_CHANNEL = "金华新闻综合"
 TARGET_GENRE = "地方标清,#genre#"
@@ -69,7 +74,7 @@ for line in upstream_lines:
                 final_lines.append(f"{SPECIAL_CHANNEL},{url}")
             inserted = True
 
-# ================= 生成 TXT =================
+# ================= 生成多源 TXT =================
 output_lines = []
 
 for line in final_lines:
@@ -122,7 +127,7 @@ if os.path.exists(LOGO_M3U):
                 "tvg-logo": get("tvg-logo"),
             }
 
-# ================= 生成 M3U =================
+# ================= 生成多源 M3U =================
 with open(OUTPUT_M3U, "w", encoding="utf-8") as f:
     f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n')
 
@@ -154,4 +159,63 @@ with open(OUTPUT_M3U, "w", encoding="utf-8") as f:
         )
         f.write(url + "\n")
 
-print("rewrite.py 执行完成：TXT + M3U")
+# ================= 生成 oneiptv.txt（单源版） =================
+one_lines = []
+seen_channels = set()
+
+for line in output_lines:
+    if line.endswith(",#genre#"):
+        one_lines.append(line)
+        continue
+
+    if "," not in line:
+        continue
+
+    name, url = line.split(",", 1)
+
+    if not url.startswith(f"rtsp://{ONE_IP}:"):
+        continue
+
+    if name in seen_channels:
+        continue
+
+    seen_channels.add(name)
+    one_lines.append(line)
+
+with open(OUTPUT_ONE_TXT, "w", encoding="utf-8") as f:
+    for l in one_lines:
+        f.write(l + "\n")
+
+# ================= 生成 oneiptv.m3u（单源版） =================
+with open(OUTPUT_ONE_M3U, "w", encoding="utf-8") as f:
+    f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n')
+
+    current_group = ""
+
+    for line in one_lines:
+        if line.endswith(",#genre#"):
+            current_group = line.replace(",#genre#", "")
+            continue
+
+        if "," not in line:
+            continue
+
+        name, url = line.split(",", 1)
+
+        meta = logo_map.get(name, {
+            "tvg-id": name,
+            "tvg-name": name,
+            "tvg-logo": "",
+        })
+
+        f.write(
+            '#EXTINF:-1 '
+            f'tvg-id="{meta["tvg-id"]}" '
+            f'tvg-name="{meta["tvg-name"]}" '
+            f'tvg-logo="{meta["tvg-logo"]}" '
+            f'group-title="{current_group}",'
+            f'{name}\n'
+        )
+        f.write(url + "\n")
+
+print("rewrite.py 执行完成：多源 + 单源 IPTV 已生成")
