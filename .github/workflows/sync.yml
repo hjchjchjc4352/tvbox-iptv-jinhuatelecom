@@ -2,19 +2,22 @@ name: Sync and Rewrite IPTV
 
 on:
   schedule:
-    - cron: "0 5 * * 1"   # 每周一 13:00 (北京时间) 执行一次
-  workflow_dispatch:      # 允许手动触发
+    - cron: "0 5 * * 1"   # 每周一执行
+  workflow_dispatch:      # 允许手动执行
 
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # --- 新增下面这两行，解决 Node.js 20 弃用警告 ---
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout your repo
-        uses: actions/checkout@v4  # 升级到 v4，解决 Node.js 20 警告
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5 # 使用标准的 Python 环境配置
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -35,11 +38,9 @@ jobs:
         run: |
           git config --local user.email "github-actions@github.com"
           git config --local user.name "GitHub Actions"
-          # 使用 git add . 确保捕获所有生成或修改的文件
           git add jinhuatelecomiptv.txt jinhuatelecomiptv.m3u oneiptv.txt oneiptv.m3u
-          # 检查是否有文件变动，防止空提交报错
           if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "Auto sync & rewrite IPTV (with catchup params)"
+            git commit -m "Auto sync & rewrite IPTV"
             git push
           else
             echo "No changes to commit"
