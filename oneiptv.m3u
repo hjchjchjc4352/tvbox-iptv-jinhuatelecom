@@ -343,3 +343,5 @@ rtsp://115.233.43.111:554/PLTV/88888913/224/3221229466/148085530.smil
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221229327/72487516.smil
 #EXTINF:-1 catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" tvg-id="好享购" tvg-name="好享购" tvg-logo="好享购" group-title="其他",好享购
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221229475/148775850.smil
+#EXTINF:-1 catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" tvg-id="江苏国际" tvg-name="江苏国际" tvg-logo="江苏国际" group-title="其他",江苏国际
+rtsp://115.233.43.111:554/PLTV/88888913/224/3221229494/150343750.smil
