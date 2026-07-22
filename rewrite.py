@@ -13,7 +13,7 @@ OUTPUT_M3U = "jinhuatelecomiptv.m3u"
 OUTPUT_ONE_TXT = "oneiptv.txt"
 OUTPUT_ONE_M3U = "oneiptv.m3u"
 
-EPG_URL = "https://myepg.org/Zhejiang_Telecom_IPTV/EPG/hz_uni_epg.xml.gz"
+EPG_URL = "https://myepg.org/EPG/Zhejiang_Unicast.xml.gz"
 
 # ================= IP =================
 DEFAULT_IPS = [
