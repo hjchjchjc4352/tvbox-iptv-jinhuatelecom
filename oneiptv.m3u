@@ -29,6 +29,8 @@ rtsp://115.233.43.111:554/PLTV/88888913/224/3221229154/52628615.smil
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221228088/10000100000000060000000002633381_0.smil
 #EXTINF:-1 catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" tvg-id="CCTV16奥林匹克" tvg-name="CCTV16奥林匹克" tvg-logo="https://myepg.org/Logo/CCTV16.png" group-title="央视高清",CCTV16奥林匹克高清
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221229307/70526246.smil
+#EXTINF:-1 catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" tvg-id="环球奇观" tvg-name="环球奇观" tvg-logo="https://myepg.org/Logo/环球奇观.png" group-title="央视高清",环球奇观
+rtsp://115.233.43.111:554/PLTV/88888913/224/3221229483/152252603.smil
 #EXTINF:-1 catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" tvg-id="CCTV1综合" tvg-name="CCTV1综合" tvg-logo="https://myepg.org/Logo/CCTV1.png" group-title="央视标清",CCTV1综合
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221227767/10000100000000060000000000304156_0.smil
 #EXTINF:-1 catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" tvg-id="CCTV2财经" tvg-name="CCTV2财经" tvg-logo="https://myepg.org/Logo/CCTV2.png" group-title="央视标清",CCTV2财经
@@ -221,6 +223,8 @@ rtsp://115.233.43.111:554/PLTV/88888913/224/3221229315/72486946.smil
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221229277/72486909.smil
 #EXTINF:-1 catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" tvg-id="快乐垂钓" tvg-name="快乐垂钓" tvg-logo="https://myepg.org/Logo/快乐垂钓.jpg" group-title="付费高清",快乐垂钓
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221229327/72487516.smil
+#EXTINF:-1 catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" tvg-id="新动漫" tvg-name="新动漫" tvg-logo="https://myepg.org/Logo/新动漫.png" group-title="付费高清",新动漫
+rtsp://115.233.43.111:554/PLTV/88888913/224/3221229500/152252632.smil
 #EXTINF:-1 catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" tvg-id="CGTN" tvg-name="CGTN" tvg-logo="https://myepg.org/Logo/CGTN.png" group-title="国际",CGTN
 rtsp://115.233.43.111:554/PLTV/88888913/224/3221228108/10000100000000060000000002707382_0.smil
 #EXTINF:-1 catchup="append" catchup-source="?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}" tvg-id="CGTN西班牙语" tvg-name="CGTN西班牙语" tvg-logo="https://myepg.org/Logo/CGTN西班牙语.png" group-title="国际",CGTN西班牙语
